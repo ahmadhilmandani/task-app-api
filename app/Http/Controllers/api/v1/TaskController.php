@@ -10,44 +10,36 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return TaskResource::collection(Task::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreTaskRequest $request)
     {
         $task = Task::create($request->validated());
 
         return TaskResource::make($task);
- 
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         return TaskResource::make(Task::find($id));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(StoreTaskRequest $request, string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        $task->title = $request->title;
+        $task->deadline = $request->deadline;
+        $task->is_done = $request->is_done;
+
+        $task->save();
+
+        return $task;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
