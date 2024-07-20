@@ -14,4 +14,9 @@ class Task extends Model
         'deadline',
         'is_done'
     ];
+
+    public function taskStep()
+    {
+        return $this->hasMany(TaskStep::class);
+    }
 }
