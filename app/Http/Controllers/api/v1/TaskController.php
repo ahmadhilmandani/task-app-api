@@ -6,19 +6,31 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
+use App\Models\TaskStep;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
     public function index()
     {
-        return TaskResource::collection(Task::all());
+        return TaskResource::collection(Task::with('taskStep')->get());
     }
 
     public function store(StoreTaskRequest $request)
     {
         $task = Task::create($request->validated());
+        $step = [];
+        foreach ($request->step as $value) {
+            array_push(
+                $step,
+                [
+                    'task_id'=> $task->id,
+                    'description'=> $value,
+                ]
+            );
+        }
 
+        TaskStep::insert($step);
         return TaskResource::make($task);
     }
 
