@@ -18,7 +18,8 @@ class TaskFactory extends Factory
     {
         return [
             'title' => fake()->jobTitle,
-            'deadline' => fake() ->date(),
+            'deadline' => fake()->date(),
+            'summary' => fake()->text,
             'is_done' => 0
         ];
     }
