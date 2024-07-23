@@ -10,4 +10,5 @@ class TaskStep extends Model
     use HasFactory;
 
     protected $fillable = ['task_id', 'description'];
+    public $timestamps = false;
 }

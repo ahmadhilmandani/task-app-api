@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('task_steps', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Task::class);
+            $table->foreignIdFor(Task::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->text('description');
         });
     }
