@@ -59,4 +59,13 @@ class TaskController extends Controller
 
         return response()->noContent();
     }
+
+    public function changeTaskStatus(Request $request, string $id)
+    {
+        $task = Task::findOrFail($id);
+        $task->is_done = $request->is_done;
+        $task->save();
+
+        return TaskResource::make($task);
+    }
 }
