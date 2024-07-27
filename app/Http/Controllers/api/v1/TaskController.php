@@ -44,6 +44,7 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
 
         $task->title = $request->title;
+        $task->summary = $request->summary;
         $task->deadline = $request->deadline;
         $task->is_done = $request->is_done;
 
