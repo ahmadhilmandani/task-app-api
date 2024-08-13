@@ -16,6 +16,7 @@ class StoreTaskRequest extends FormRequest
         return [
             'title' =>  'required',
             'deadline' => 'required',
+            'summary' => 'required',
             'is_done' => 'required'
         ];
     }
